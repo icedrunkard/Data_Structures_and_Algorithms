@@ -39,23 +39,25 @@ class Sorting():
                lst[:1] + \
                self.quick_sort([x for x in lst[1:] if x >= lst[0]])
 
-    def insert_sort(self,lst):
+    def insert_sort(self, lst):
         for i in range(len(lst)):
-            x=lst[i]
-            j=i
-            while j>0 and lst[j-1]>lst[j]:
-                lst[j - 1] ,lst[j]=lst[j] ,lst[j-1]
-                j-=1
-            lst[j]=x
+            x = lst[i]
+            j = i
+            while j > 0 and lst[j - 1] > lst[j]:
+                lst[j - 1], lst[j] = lst[j], lst[j - 1]
+                j -= 1
+            lst[j] = x
         return lst
 
-    def bubble_sort(self,lst):
+    def bubble_sort(self, lst):
         for i in range(len(lst))[::-1]:
+            swap = False
             for j in range(i):
-                if lst[j+1]<lst[j]:
-                    lst[j+1],lst[j]=lst[j],lst[j+1]
+                if lst[j + 1] < lst[j]:
+                    lst[j + 1], lst[j] = lst[j], lst[j + 1]
+                    swap = True
+            if not swap: break
         return lst
-
 
 
 lst = list(range(15))
