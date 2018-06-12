@@ -36,7 +36,9 @@ class SingleChainTable:
             item = SNode(data_or_node)
         j = 0
         if index == 0:
+            item.next=self.head
             self.head = item
+            self.length+=1
         else:
             node = self.head
             while j < index and node:
