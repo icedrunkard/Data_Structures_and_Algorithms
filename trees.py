@@ -1,8 +1,8 @@
 # coding=utf-8
 
-class Node:
-    def __init__(self, root=None, left=None, right=None):
-        self.root = root
+class Node(object):
+    def __init__(self, value, left=None, right=None):
+        self.value = value
         self.left = left
         self.right = right
 
@@ -62,37 +62,59 @@ class Tranversor():
                 break
         print(total)
 
+    def postorder_from_pre_mid(self,pre, mid):
+        if len(mid) <= 1:
+            return mid
+        else:
+            return self.postorder_from_pre_mid(pre[1:mid.index(pre[0]) + 1], mid[:mid.index(pre[0])]) \
+                   + self.postorder_from_pre_mid(pre[mid.index(pre[0]) + 1:], mid[mid.index(pre[0]) + 1:]) + pre[:1]
 
-def get_after_deep(pre, mid, a):
-    if len(pre) == 1:
-        a.append(pre[0])
-        return
-    if len(pre) == 0:
-        return
-    root = pre[0]
-    root_index = mid.index(root)
-    get_after_deep(pre[1:root_index + 1], mid[:root_index], a)
-    get_after_deep(pre[root_index + 1:], mid[root_index + 1:], a)
-    a.append(root)
-    return a
-
-
-def last_sort(pre, mid):
-    if len(mid) <= 1:
-        return mid
-    else:
-        return last_sort(pre[1:mid.index(pre[0]) + 1], mid[:mid.index(pre[0])]) \
-               + last_sort(pre[mid.index(pre[0]) + 1:], mid[mid.index(pre[0]) + 1:]) + pre[:1]
-
-
-pre = [1, 2, 3]
-mid = [2, 1, 3]
-print(last_sort(pre, mid))
-
-# res = get_after_deep([1, 2, 4, 5, 8, 9, 11, 3, 6, 7, 10], [4, 2, 8, 5, 11, 9, 1, 6, 3, 10, 7], [])
-# res = get_after_deep([1,2,3], [2,1,3], [])
-# print(res)
+# pre = [1, 2, 3]
+# mid = [2, 1, 3]
 # res = [4, 8, 11, 9, 5, 2, 6, 10, 7, 3, 1]
 # t=Tranversor()
 # t.pre_r_tranverse(node)
 # t.level_tranverse(node)
+class AVLNode(Node):
+    def __init__(self,value):
+        Node.__init__(self,value)
+        self.bf=0
+
+class AVLTree:
+    def __init__(self):
+        self.root=None
+
+    def insert(self,data_or_node):
+        if isinstance(data_or_node,AVLNode):
+            node=data_or_node
+        elif isinstance(data_or_node,int):
+            node=AVLNode(data_or_node)
+        else:
+            raise TypeError('wrong data type, please input Type "integer" or "Node"...')
+
+        # 此树为空时
+        if not self.root:
+            self.root=node
+            return
+        o=self.root
+        while o:
+            if node.value<o.value:
+                if not o.left:
+                    o.left=node
+                    o.bf=1
+                    return
+                else:
+                    o=o.left
+            else:
+                if not o.right:
+                    o.right = node
+                    o.bf = -1
+                    return
+                else:
+                    o = o.right
+
+
+
+
+
+
