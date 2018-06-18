@@ -206,6 +206,7 @@ class AVLTree:
             b.bf=0
         c.bf=0
         return c
+
     def __str__(self):
         if self.root:
             return 'AVLTree(root=[{},bf={}],{},{})'.format(self.root.value, self.root.bf, self.root.left,
