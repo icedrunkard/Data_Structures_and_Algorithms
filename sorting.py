@@ -43,10 +43,10 @@ class Sorting():
         for i in range(len(lst)):
             x = lst[i]
             j = i
-            while j > 0 and lst[j - 1] > lst[j]:
-                lst[j - 1], lst[j] = lst[j], lst[j - 1]
+            while j > 0 and lst[j - 1] > x:
+                lst[j] = lst[j - 1]
                 j -= 1
-            lst[j] = x
+            # lst[j] = x
         return lst
 
     def bubble_sort(self, lst):
@@ -65,6 +65,6 @@ random.shuffle(lst)
 
 print('before:', lst)
 s = Sorting()
-lst = s.bubble_sort(lst)
+lst = s.insert_sort(lst)
 
 print('after:', lst)
