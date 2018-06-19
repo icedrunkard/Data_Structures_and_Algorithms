@@ -46,7 +46,7 @@ class Sorting():
             while j > 0 and lst[j - 1] > x:
                 lst[j] = lst[j - 1]
                 j -= 1
-            # lst[j] = x
+            lst[j] = x
         return lst
 
     def bubble_sort(self, lst):
