@@ -59,12 +59,21 @@ class Sorting():
             if not swap: break
         return lst
 
+    def shell_sort(self,lst):
+        step=len(lst)//3
+        while step>0:
+            for i in range(step,len(lst)):
+                while i>=step and lst[i-step]>lst[i]:
+                    lst[i],lst[i-step]=lst[i-step],lst[i]
+                    i-=step
+            step=step//3
+        return lst
 
 lst = list(range(15))
 random.shuffle(lst)
-
+lst=[7, 13, 10, 5, 8, 1, 4, 9, 0, 3, 6, 2, 14, 11, 12]
 print('before:', lst)
 s = Sorting()
-lst = s.insert_sort(lst)
+lst = s.shell_sort(lst)
 
 print('after:', lst)
